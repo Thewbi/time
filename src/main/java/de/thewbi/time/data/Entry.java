@@ -1,13 +1,18 @@
 package de.thewbi.time.data;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -28,6 +33,12 @@ public class Entry {
 	private String name;
 
 	private String description;
+
+	@ManyToOne
+	private Entry parent;
+
+	@OneToMany(mappedBy = "parent", fetch = FetchType.EAGER)
+	private Collection<Entry> children = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -75,6 +86,22 @@ public class Entry {
 
 	public void setEnd(final Timestamp end) {
 		this.end = end;
+	}
+
+	public Entry getParent() {
+		return parent;
+	}
+
+	public void setParent(final Entry parent) {
+		this.parent = parent;
+	}
+
+	public Collection<Entry> getChildren() {
+		return children;
+	}
+
+	public void setChildren(final Collection<Entry> children) {
+		this.children = children;
 	}
 
 }
