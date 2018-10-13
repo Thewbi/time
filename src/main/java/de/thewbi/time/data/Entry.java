@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -30,6 +31,7 @@ public class Entry {
 
 	private Timestamp end;
 
+	@Column(name = "NAME", unique = true, nullable = false)
 	private String name;
 
 	private String description;
@@ -37,7 +39,7 @@ public class Entry {
 	@ManyToOne
 	private Entry parent;
 
-	@OneToMany(mappedBy = "parent", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
 	private Collection<Entry> children = new ArrayList<>();
 
 	public Long getId() {

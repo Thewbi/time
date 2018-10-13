@@ -2,11 +2,12 @@
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Hello</title>
+<title>Time</title>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -26,14 +27,6 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	Hello ${name}
-	<br />
-	<br />
-	<c:url value="/resources/text.txt" var="url" />
-	<spring:url value="/resources/text.txt" htmlEscape="true"
-		var="springUrl" />
-	Spring URL: ${springUrl} at ${time}
-	<br> JSTL URL: ${url}
-	<br> Message: ${message}
+	<h1>Tasks</h1>
 </body>
 </html>

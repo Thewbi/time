@@ -27,6 +27,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
@@ -67,6 +69,7 @@ public class EntryRepositoryTest {
 	}
 
 	@Test
+	@Transactional(propagation = Propagation.SUPPORTS)
 	@DatabaseSetup(type = DatabaseOperation.CLEAN_INSERT, value = "/entityrepository/testdata_create_recursive/create_recursive_sample.xml")
 	@ExpectedDatabase(value = "/entityrepository/testdata_create_recursive/create_recursive_expected.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
 	public void testSaveRecursive() throws AmbiguousTableNameException, DataSetException, FileNotFoundException,
@@ -133,20 +136,17 @@ public class EntryRepositoryTest {
 		for (final Entry entry : allByType) {
 			dumpEntry(entry);
 		}
+
 	}
 
 	private void dumpEntry(final Entry entry) {
+
 		System.out.println(entry.getEntryType().name() + " " + entry.getName());
+
 		for (final Entry child : entry.getChildren()) {
 			dumpEntry(child);
 		}
 	}
-
-////	@Ignore
-//	@Test
-//	public void testExportData() throws DatabaseUnitException, SQLException, FileNotFoundException, IOException {
-//		export();
-//	}
 
 	private void export(final String path) throws DatabaseUnitException, SQLException, AmbiguousTableNameException,
 			IOException, DataSetException, FileNotFoundException {

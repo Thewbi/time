@@ -13,7 +13,7 @@
   <body>
     <h1>Hello, world!</h1>
     
-    <div class="alert alert-primary" role="alert">
+<div class="alert alert-primary" role="alert">
   A simple primary alert check it out!
 </div>
 <div class="alert alert-secondary" role="alert">
