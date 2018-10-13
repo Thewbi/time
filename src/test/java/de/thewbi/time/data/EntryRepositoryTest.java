@@ -132,7 +132,7 @@ public class EntryRepositoryTest {
 
 		export("/testdata_create_recursive/partial.xml");
 
-		final List<Entry> allByType = entryRepository.getAllByType(EntryType.PROJECT);
+		final List<Entry> allByType = entryRepository.findAllByType(EntryType.PROJECT);
 		for (final Entry entry : allByType) {
 			dumpEntry(entry);
 		}

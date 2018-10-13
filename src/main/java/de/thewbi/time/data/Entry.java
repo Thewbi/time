@@ -16,6 +16,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import org.springframework.data.annotation.Transient;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 public class Entry {
 
@@ -23,6 +27,10 @@ public class Entry {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entity_sequence")
 	@SequenceGenerator(name = "entity_sequence", sequenceName = "ENTITY_SEQ")
 	private Long id;
+
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@Transient
+	private Long tempParentId;
 
 	@Enumerated(EnumType.STRING)
 	private EntryType entryType;
@@ -104,6 +112,14 @@ public class Entry {
 
 	public void setChildren(final Collection<Entry> children) {
 		this.children = children;
+	}
+
+	public Long getTempParentId() {
+		return tempParentId;
+	}
+
+	public void setTempParentId(final Long tempParentId) {
+		this.tempParentId = tempParentId;
 	}
 
 }

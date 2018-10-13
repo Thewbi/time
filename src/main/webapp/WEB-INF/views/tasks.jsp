@@ -27,6 +27,32 @@
 	crossorigin="anonymous">
 </head>
 <body>
+	<a href="<c:url value="/projects"/>">Back to Projects</a>
+
 	<h1>Tasks</h1>
+	
+	<c:set var="errorMsg" value="${errorMsg}" />
+	<c:if test="${not empty errorMsg}">
+		<div class="alert alert-danger" role="alert">
+		  <spring:message code="${errorMsg}"/>
+		</div>
+	</c:if>
+	
+	<c:set var="taskCreatedMsg" value="${taskCreatedMsg}" />
+	<c:if test="${not empty taskCreatedMsg}">
+		<div class="alert alert-success" role="alert">
+		  <spring:message code="${taskCreatedMsg}"/>
+		</div>
+	</c:if>
+
+	<table class="table">
+	<c:forEach var="task" items="${tasks}">
+		<tr>
+			<td>Task Name: <a href="<c:url value="/tasks/${task.id}"/>"><c:out value="${task.name}" /></a></td>
+			<td>Task Description: <c:out value="${task.description}" /></td>
+		</tr>
+	</c:forEach>
+	</table>
+ 
 </body>
 </html>

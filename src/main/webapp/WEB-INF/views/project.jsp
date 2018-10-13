@@ -27,12 +27,13 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<h1>Projects</h1>
-	
-	<h2>Add Project</h2>
+	<a href="<c:url value="/projects"/>">Back to Projects</a>
 
-	<form:form method="POST" action="/projects/addProject"
-		modelAttribute="entry">
+	<h1>Project ${project.name}</h1>
+	
+	<h2>Add Task</h2>
+	
+	<form:form method="POST" action="/projects/addTaskToProject" modelAttribute="entry">
 		<table>
 			<tr>
 				<td><form:label path="name">Name</form:label></td>
@@ -43,9 +44,12 @@
 				<td><form:textarea path="description" rows="5" cols="30" /></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="Submit" /></td>
+				<td><input type="submit" value="Submit" class="btn btn-primary" /></td>
 			</tr>
 		</table>
+		
+		<form:hidden path="tempParentId" value="${project.id}" />
+		
 	</form:form>
 	
 	<c:set var="errorMsg" value="${errorMsg}" />
@@ -55,22 +59,23 @@
 		</div>
 	</c:if>
 	
-	<c:set var="projectCreatedMsg" value="${projectCreatedMsg}" />
-	<c:if test="${not empty projectCreatedMsg}">
+	<c:set var="taskCreatedMsg" value="${taskCreatedMsg}" />
+	<c:if test="${not empty taskCreatedMsg}">
 		<div class="alert alert-success" role="alert">
-		  <spring:message code="${projectCreatedMsg}"/>
+		  <spring:message code="${taskCreatedMsg}"/>
 		</div>
 	</c:if>
-	
-	<h2>All Projects</h2>
+
+	<h2>Tasks in this Project</h2>
 
 	<table class="table">
-	<c:forEach var="project" items="${projects}">
+	<c:forEach var="task" items="${tasks}">
 		<tr>
-			<td>Project Name: <a href="<c:url value="/projects/${project.id}"/>"><c:out value="${project.name}" /></a></td>
-			<td>Project Description: <c:out value="${project.description}" /></td>
+			<td>Task Name: <a href="<c:url value="/tasks/${task.id}"/>"><c:out value="${task.name}" /></a></td>
+			<td>Task Description: <c:out value="${task.description}" /></td>
 		</tr>
 	</c:forEach>
 	</table>
+ 
 </body>
 </html>

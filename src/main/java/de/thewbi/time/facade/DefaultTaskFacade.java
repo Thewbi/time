@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package de.thewbi.time.facade;
 
 import java.util.List;
@@ -11,23 +14,23 @@ import de.thewbi.time.data.EntryRepository;
 import de.thewbi.time.data.EntryType;
 
 @Component
-public class DefaultProjectFacade implements ProjectFacade {
+public class DefaultTaskFacade implements TaskFacade {
 
 	@Autowired
 	private EntryRepository entryRepository;
 
 	@Override
-	public List<Entry> getProjects() {
-		return entryRepository.findAllByType(EntryType.PROJECT);
+	public List<Entry> getTasks() {
+		return entryRepository.findAllByType(EntryType.TASK);
 	}
 
 	@Override
-	public void saveProject(final Entry entry) {
+	public void saveTask(final Entry entry) {
 		entryRepository.save(entry);
 	}
 
 	@Override
-	public Optional<Entry> getProjectById(final Long id) {
+	public Optional<Entry> getTaskById(final Long id) {
 		return entryRepository.findById(id);
 	}
 

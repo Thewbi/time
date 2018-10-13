@@ -11,24 +11,29 @@ import de.thewbi.time.data.EntryRepository;
 import de.thewbi.time.data.EntryType;
 
 @Component
-public class DefaultProjectFacade implements ProjectFacade {
+public class DefaultDurationFacade implements DurationFacade {
 
 	@Autowired
 	private EntryRepository entryRepository;
 
 	@Override
-	public List<Entry> getProjects() {
-		return entryRepository.findAllByType(EntryType.PROJECT);
+	public List<Entry> getDurations() {
+		return entryRepository.findAllByType(EntryType.DURATION);
 	}
 
 	@Override
-	public void saveProject(final Entry entry) {
+	public void saveDuration(final Entry entry) {
 		entryRepository.save(entry);
 	}
 
 	@Override
-	public Optional<Entry> getProjectById(final Long id) {
+	public Optional<Entry> getDurationById(final Long id) {
 		return entryRepository.findById(id);
+	}
+
+	@Override
+	public void delete(final Entry entry) {
+		entryRepository.delete(entry);
 	}
 
 }
