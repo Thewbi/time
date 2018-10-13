@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import org.apache.commons.lang3.time.DurationFormatUtils;
+import org.joda.time.Interval;
 import org.springframework.data.annotation.Transient;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -49,6 +51,32 @@ public class Entry {
 
 	@OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
 	private Collection<Entry> children = new ArrayList<>();
+
+	public long getDurationInMillis() {
+		return getInterval().toDurationMillis();
+	}
+
+	public String getDurationAsString() {
+		return DurationFormatUtils.formatDuration(getInterval().toDurationMillis(), "HH:mm:ss");
+	}
+
+	private Interval getInterval() {
+
+		if (start == null || end == null) {
+			return new Interval(0, 0);
+		}
+
+		final long startInMillis = start.getTime();
+		final long endInMillis = end.getTime();
+
+		Interval interval = null;
+		if (startInMillis < endInMillis) {
+			interval = new Interval(startInMillis, endInMillis);
+		} else {
+			interval = new Interval(endInMillis, startInMillis);
+		}
+		return interval;
+	}
 
 	public Long getId() {
 		return id;

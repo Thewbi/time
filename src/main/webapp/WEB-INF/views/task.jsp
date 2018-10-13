@@ -133,7 +133,11 @@
 	<table class="table">
 	<c:forEach var="duration" items="${durations}">
 		<tr>
+			<td>Duration Name: <a href="<c:url value="/durations/${duration.id}"/>"><c:out value="${duration.parent.parent.name}-${duration.parent.name} ${duration.name}" /></a></td>
+			<td>Duration: <c:out value="${duration.durationAsString}" /></td>
+			<!-- 
 			<td>Duration Name: <a href="<c:url value="/durations/${duration.id}"/>"><c:out value="${duration.name}" /></a></td>
+		    -->
 			<td>Duration Description: <c:out value="${duration.description}" /></td>
 			<td>Duration Start: <fmt:formatDate value="${duration.start}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 			<td>Duration End: <fmt:formatDate value="${duration.end}" pattern="yyyy-MM-dd HH:mm:ss" /></td>

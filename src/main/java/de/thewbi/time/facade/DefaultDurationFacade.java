@@ -1,5 +1,6 @@
 package de.thewbi.time.facade;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +35,20 @@ public class DefaultDurationFacade implements DurationFacade {
 	@Override
 	public void delete(final Entry entry) {
 		entryRepository.delete(entry);
+	}
+
+	@Override
+	public List<Entry> getDurationsForWeeklyReport() {
+
+		final Calendar calendarStart = Calendar.getInstance();
+		calendarStart.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+
+		final Calendar calendarEnd = Calendar.getInstance();
+		calendarEnd.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		calendarEnd.add(Calendar.DATE, 7);
+
+		return entryRepository.findAllByTypeAndDateRange(EntryType.DURATION, calendarStart.getTime(),
+				calendarEnd.getTime());
 	}
 
 }

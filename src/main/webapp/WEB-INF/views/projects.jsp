@@ -29,6 +29,8 @@
 <body>
 	<h1>Projects</h1>
 	
+	<a href="<c:url value="/reports/weekly"/>">WeeklyReport</a>
+	
 	<h2>Add Project</h2>
 
 	<form:form method="POST" action="/projects/addProject"

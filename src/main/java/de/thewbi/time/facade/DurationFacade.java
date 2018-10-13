@@ -15,4 +15,6 @@ public interface DurationFacade {
 
 	void delete(Entry entry);
 
+	List<Entry> getDurationsForWeeklyReport();
+
 }
