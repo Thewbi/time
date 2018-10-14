@@ -28,51 +28,55 @@
 </head>
 <body>
 	<h1>Projects</h1>
-	
+
 	<a href="<c:url value="/reports/weekly"/>">WeeklyReport</a>
-	
+
 	<h2>Add Project</h2>
 
-	<form:form method="POST" action="/projects/addProject"
+	<c:url var="addProjectFormURL" value="/projects/addProject" />
+	<form:form method="POST" action="${addProjectFormURL}"
 		modelAttribute="entry">
 		<table>
 			<tr>
 				<td><form:label path="name">Name</form:label></td>
-				<td><form:input path="name" maxlength="12" required="required" /><form:errors path="name" cssClass="error" /></td>
+				<td><form:input path="name" maxlength="12" required="required" />
+					<form:errors path="name" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="description">Description</form:label></td>
 				<td><form:textarea path="description" rows="5" cols="30" /></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="Submit" /></td>
+				<td><input type="submit" value="Submit" class="btn btn-primary" /></td>
 			</tr>
 		</table>
 	</form:form>
-	
+
 	<c:set var="errorMsg" value="${errorMsg}" />
 	<c:if test="${not empty errorMsg}">
 		<div class="alert alert-danger" role="alert">
-		  <spring:message code="${errorMsg}"/>
+			<spring:message code="${errorMsg}" />
 		</div>
 	</c:if>
-	
+
 	<c:set var="projectCreatedMsg" value="${projectCreatedMsg}" />
 	<c:if test="${not empty projectCreatedMsg}">
 		<div class="alert alert-success" role="alert">
-		  <spring:message code="${projectCreatedMsg}"/>
+			<spring:message code="${projectCreatedMsg}" />
 		</div>
 	</c:if>
-	
+
 	<h2>All Projects</h2>
 
 	<table class="table">
-	<c:forEach var="project" items="${projects}">
-		<tr>
-			<td>Project Name: <a href="<c:url value="/projects/${project.id}"/>"><c:out value="${project.name}" /></a></td>
-			<td>Project Description: <c:out value="${project.description}" /></td>
-		</tr>
-	</c:forEach>
+		<c:forEach var="project" items="${projects}">
+			<tr>
+				<td>Project Name: <a
+					href="<c:url value="/projects/${project.id}"/>"><c:out
+							value="${project.name}" /></a></td>
+				<td>Project Description: <c:out value="${project.description}" /></td>
+			</tr>
+		</c:forEach>
 	</table>
 </body>
 </html>

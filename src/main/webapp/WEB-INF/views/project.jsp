@@ -30,14 +30,17 @@
 	<a href="<c:url value="/projects"/>">Back to Projects</a>
 
 	<h1>Project ${project.name}</h1>
-	
+
 	<h2>Add Task</h2>
-	
-	<form:form method="POST" action="/projects/addTaskToProject" modelAttribute="entry">
+
+	<c:url var="addTaskFormURL" value="/projects/addTaskToProject" />
+	<form:form method="POST" action="${addTaskFormURL}"
+		modelAttribute="entry">
 		<table>
 			<tr>
 				<td><form:label path="name">Name</form:label></td>
-				<td><form:input path="name" maxlength="12" required="required" /><form:errors path="name" cssClass="error" /></td>
+				<td><form:input path="name" maxlength="12" required="required" />
+					<form:errors path="name" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="description">Description</form:label></td>
@@ -47,35 +50,34 @@
 				<td><input type="submit" value="Submit" class="btn btn-primary" /></td>
 			</tr>
 		</table>
-		
 		<form:hidden path="tempParentId" value="${project.id}" />
-		
 	</form:form>
-	
+
 	<c:set var="errorMsg" value="${errorMsg}" />
 	<c:if test="${not empty errorMsg}">
 		<div class="alert alert-danger" role="alert">
-		  <spring:message code="${errorMsg}"/>
+			<spring:message code="${errorMsg}" />
 		</div>
 	</c:if>
-	
+
 	<c:set var="taskCreatedMsg" value="${taskCreatedMsg}" />
 	<c:if test="${not empty taskCreatedMsg}">
 		<div class="alert alert-success" role="alert">
-		  <spring:message code="${taskCreatedMsg}"/>
+			<spring:message code="${taskCreatedMsg}" />
 		</div>
 	</c:if>
 
 	<h2>Tasks in this Project</h2>
 
 	<table class="table">
-	<c:forEach var="task" items="${tasks}">
-		<tr>
-			<td>Task Name: <a href="<c:url value="/tasks/${task.id}"/>"><c:out value="${task.name}" /></a></td>
-			<td>Task Description: <c:out value="${task.description}" /></td>
-		</tr>
-	</c:forEach>
+		<c:forEach var="task" items="${tasks}">
+			<tr>
+				<td>Task Name: <a href="<c:url value="/tasks/${task.id}"/>"><c:out
+							value="${task.name}" /></a></td>
+				<td>Task Description: <c:out value="${task.description}" /></td>
+			</tr>
+		</c:forEach>
 	</table>
- 
+
 </body>
 </html>

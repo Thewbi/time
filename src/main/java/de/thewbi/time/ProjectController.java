@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +24,12 @@ import de.thewbi.time.facade.TaskFacade;
 
 /**
  * http://localhost:8080/projects
- *
  */
 @Controller
 @RequestMapping("/projects")
 public class ProjectController {
+
+	private static transient final Logger LOG = LoggerFactory.getLogger(ProjectController.class);
 
 	@Autowired
 	private ProjectFacade projectFacade;
@@ -44,6 +47,8 @@ public class ProjectController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(final Model model) {
 
+		LOG.info("GET /projects");
+
 		if (!model.containsAttribute("errorMsg")) {
 			model.addAttribute("errorMsg", "");
 		}
@@ -56,6 +61,8 @@ public class ProjectController {
 
 		final List<Entry> projects = projectFacade.getProjects();
 		model.addAttribute("projects", projects);
+
+		LOG.info("GET /projects done");
 
 		// this will load, process and return /WEB-INF/views/<value>.jsp
 		return "projects";
