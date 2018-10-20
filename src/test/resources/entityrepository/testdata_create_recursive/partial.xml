@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <entry ID="2" DESCRIPTION="description_A_project" END="1970-01-18 19:36:12.838" ENTRY_TYPE="PROJECT" NAME="name_A_project" START="1970-01-18 19:36:12.838"/>
+  <entry ID="3" DESCRIPTION="description_A1_task" END="1970-01-18 19:36:12.838" ENTRY_TYPE="TASK" NAME="name_A1_task" START="1970-01-18 19:36:12.838" PARENT_ID="2"/>
+  <entry ID="4" DESCRIPTION="description_A2_task" END="1970-01-18 19:36:12.838" ENTRY_TYPE="TASK" NAME="name_A2_task" START="1970-01-18 19:36:12.838" PARENT_ID="2"/>
+  <entry ID="5" DESCRIPTION="description_A11_duration" END="1970-01-18 19:36:12.838" ENTRY_TYPE="DURATION" NAME="name_A11_duration" START="1970-01-18 19:36:12.838" PARENT_ID="3"/>
+  <entry ID="6" DESCRIPTION="description_A21_duration" END="1970-01-18 19:36:12.838" ENTRY_TYPE="DURATION" NAME="name_A21_duration" START="1970-01-18 19:36:12.838" PARENT_ID="4"/>
+</dataset>
